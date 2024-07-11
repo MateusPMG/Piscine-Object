@@ -31,3 +31,22 @@ int Account::getValue()const{
 void Account::setValue(int value){
 	this->value = value;
 }
+
+void Account::addValue(int value){
+	if (value > 0)
+		this->value += value;
+	else
+		std::cout << "No negative inputs allowed\n";
+}
+
+void Account::removeValue(int value){
+	if (value > 0){
+		if (value <= this->value)
+			this->value -= value;
+		else
+			std::cout << "Withdrawal ammount exceeds account value\n";
+	}
+	else
+		std::cout << "No negative inputs allowed\n";
+
+}

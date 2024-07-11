@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "account.cpp"
+#include "account.hpp"
 #include <vector>
 
 class Bank {
@@ -12,6 +12,9 @@ class Bank {
 		~Bank();
 		Bank& operator=(const Bank& copy);
 		Bank(const Bank& copy);
+		void createAccount(int value);
+		void deleteAccount(int id);
 		void loan(int id, int value);
-		void deposit(int value);
+		void deposit(int id, int value);
+		void withdraw(int id, int value);
 };
