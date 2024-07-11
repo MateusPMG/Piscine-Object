@@ -5,7 +5,7 @@
 
 class Bank {
 	private:
-		std::vector<int> accountList;
+		std::vector<Account> accountList;
 		int vault;
 	public:
 		Bank();
