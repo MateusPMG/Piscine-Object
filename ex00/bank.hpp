@@ -17,4 +17,6 @@ class Bank {
 		void loan(int id, int value);
 		void deposit(int id, int value);
 		void withdraw(int id, int value);
+		int getValue(int id);
+		int getVault();
 };

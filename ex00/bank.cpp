@@ -63,3 +63,11 @@ void Bank::withdraw(int id, int value){
 	else
 		std::cout << "Account ID doesnt exist\n";
 }
+
+int Bank::getValue(int id){
+	return (accountList.at(id).getValue());
+}
+
+int Bank::getVault(){
+	return (vault);
+}
