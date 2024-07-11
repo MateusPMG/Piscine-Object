@@ -1,5 +1,5 @@
 NAME = DivideNConquer
-SRC = main.cpp
+SRC = main.cpp account.cpp
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -g3 -O3 -std=c++98 -fsanitize=address,undefined
 

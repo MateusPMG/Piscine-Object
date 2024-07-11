@@ -1,5 +1,5 @@
 #pragma once
- #include <iostream>
+#include <iostream>
 
 class Account{
 	private:
@@ -8,6 +8,9 @@ class Account{
 		Account();
 		Account(int id, int value);
 		~Account();
-		Account& operator=(Account& copy);
+		Account& operator=(const Account& copy);
 		Account(const Account& copy);
+		int getID() const;
+		int getValue() const;
+		void setValue(int value);
 }; 
