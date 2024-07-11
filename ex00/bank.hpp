@@ -3,6 +3,8 @@
 #include "account.hpp"
 #include <vector>
 
+class Account;
+
 class Bank {
 	private:
 		std::vector<Account> accountList;
@@ -19,4 +21,5 @@ class Bank {
 		void withdraw(int id, int value);
 		int getValue(int id);
 		int getVault();
+		int getNAccounts();
 };

@@ -1,7 +1,7 @@
 NAME = DivideNConquer
 SRC = main.cpp bank.cpp account.cpp
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -g3 -O3 -std=c++98 -fsanitize=address,undefined
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address,undefined
 
 all:	$(NAME)
 

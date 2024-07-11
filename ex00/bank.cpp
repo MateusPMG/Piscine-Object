@@ -28,7 +28,7 @@ void Bank::createAccount(int value){
 }
 
 void Bank::deleteAccount(int id){
-	if ( id >= 0 && id < accountList.size()){
+	if ( id >= 0 && id < static_cast<int>(accountList.size())){
 		accountList.erase(accountList.begin() + id);
 	}
 	std::cout << "Account number " << id << " was deleted\n";
@@ -39,7 +39,7 @@ void Bank::loan(int id, int value){
 		std::cout << "Loan amount requested surpasses bank vault amount\n";
 		return;
 	}
-	if ( id >= 0 && id < accountList.size()){
+	if ( id >= 0 && id < static_cast<int>(accountList.size())){
 		accountList[id].addValue(value);
 		vault -= value;
 	}
@@ -48,7 +48,7 @@ void Bank::loan(int id, int value){
 }
 
 void Bank::deposit(int id, int value){
-	if ( id >= 0 && id < accountList.size()){
+	if ( id >= 0 && id < static_cast<int>(accountList.size())){
 		accountList[id].addValue(static_cast<int>(value*0.95));
 		vault += static_cast<int>(value*0.05);
 	}
@@ -57,7 +57,7 @@ void Bank::deposit(int id, int value){
 }
 
 void Bank::withdraw(int id, int value){
-	if ( id >= 0 && id < accountList.size()){
+	if ( id >= 0 && id < static_cast<int>(accountList.size())){
 		accountList[id].removeValue(value);
 	}	
 	else
@@ -70,4 +70,8 @@ int Bank::getValue(int id){
 
 int Bank::getVault(){
 	return (vault);
+}
+
+int Bank::getNAccounts(){
+	return (accountList.size());
 }
