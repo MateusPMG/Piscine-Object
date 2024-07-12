@@ -9,15 +9,14 @@ Account::Account(int id, int value){
 
 Account::~Account(){}
 
-Account& Account::operator=(const Account& copy){
-	this->id = copy.id;
-	this->value = copy.value;
-	return *this;
-}
+Account::Account(const Account& copy) : id(copy.id), value(copy.value) {}
 
-Account::Account(const Account& copy){
-	this->id = copy.id;
-	this->value = copy.value;
+Account& Account::operator=(const Account& copy) {
+    if (this != &copy) {
+        id = copy.id;
+        value = copy.value;
+    }
+    return *this;
 }
 
 int Account::getID()const{

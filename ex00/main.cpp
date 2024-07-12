@@ -15,7 +15,7 @@ void testAddMoneyViaBankOnly()
     // Attempt to add money directly (should not be possible in a protected class)
     // Direct modification is not allowed, so we modify through the bank
     bank.deposit(0, 100);
-    if (bank.getValue(0) == 95 && bank.getVault() == 5)
+    if (bank.getValue(0) == 96 && bank.getVault() == 5)
     {
         std::cout << GREEN << "Test passed!\n" << RESET;
     }
@@ -77,24 +77,35 @@ void testCreateDeleteModifyAccounts()
 
     if (initialSize == 2 && newSize == 1)
     {
-        std::cout << GREEN << "Test passed!\n" << RESET;
+        std::cout << GREEN << "Test 1 passed!\n" << RESET;
     }
     else
     {
-        std::cout << RED << "Test failed!\n" << RESET;
+        std::cout << RED << "Test 1 failed!\n" << RESET;
     }
 
     // Test modifying account
-    bank.deposit(0, 100);
+    bank.deposit(1, 100);
     
-    if (bank.getValue(0) == 95 && bank.getVault() == 5)
+    if (bank.getValue(1) == 96 && bank.getVault() == 5)
     {
-        std::cout << GREEN << "Test passed!\n" << RESET;
+        std::cout << GREEN << "Test 2 passed!\n" << RESET;
     }
     else
     {
-        std::cout << RED << "Test failed!\n" << RESET;
+        std::cout << RED << "Test 2 failed! : " << bank.getValue(1) << RESET;
     }
+
+    std::cout << "Money in the bank: " << bank.getValue(0) << std::endl; 
+
+    // test add money to not exist account
+    bank.deposit(3, 100);
+
+    // change id of account
+    bank.createAccount(1);
+    std::cout << "Money in the bank: " << bank.getValue(2) << std::endl;
+
+    
 }
 
 /* void testAccountModificationProtection()

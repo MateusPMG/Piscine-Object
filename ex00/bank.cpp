@@ -5,12 +5,19 @@ Bank::Bank():vault(0){}
 Bank::~Bank(){}
 
 Bank& Bank::operator=(const Bank& copy){
-	this->accountList = copy.accountList;
-	return *this;
+	if (this != &copy) {
+            accountList.clear();
+            for (size_t i = 0; i < copy.accountList.size(); ++i) {
+                accountList.push_back(Account(copy.accountList[i]));
+            }
+        }
+        return *this;
 }
 
 Bank::Bank(const Bank& copy){
-	this->accountList = copy.accountList;
+	for (size_t i = 0; i < copy.accountList.size(); ++i) {
+            accountList.push_back(Account(copy.accountList[i]));
+	}
 }
 
 void Bank::createAccount(int value){
@@ -22,8 +29,8 @@ void Bank::createAccount(int value){
 		std::cout << "Account number 0 was created\n";
 	}
 	else{
-		accountList.push_back(Account(accountList.size() + 1, value));
 		std::cout << "Account number " << accountList.size() << " was created \n";
+		accountList.push_back(Account(accountList.size(), value));
 	}
 }
 
@@ -48,12 +55,14 @@ void Bank::loan(int id, int value){
 }
 
 void Bank::deposit(int id, int value){
-	if ( id >= 0 && id < static_cast<int>(accountList.size())){
-		accountList[id].addValue(static_cast<int>(value*0.95));
-		vault += static_cast<int>(value*0.05);
+	for (std::vector<Account>::iterator it = accountList.begin(); it < accountList.end(); it++){
+		if ((*it).getID() == id){
+			(*it).addValue(0.95 * value);
+			vault += 0.05 * value;
+			return;
+		}
 	}
-	else
-		std::cout << "Account ID doesnt exist\n";
+	std::cout << "Account ID doesnt exist\n";
 }
 
 void Bank::withdraw(int id, int value){
@@ -65,7 +74,12 @@ void Bank::withdraw(int id, int value){
 }
 
 int Bank::getValue(int id){
-	return (accountList.at(id).getValue());
+	for (std::vector<Account>::iterator it = accountList.begin(); it < accountList.end(); it++){
+		if ((*it).getID() == id){
+			return ((*it).getValue());
+		}
+	}
+	return (-1);
 }
 
 int Bank::getVault(){
