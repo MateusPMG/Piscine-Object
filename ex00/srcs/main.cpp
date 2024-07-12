@@ -1,10 +1,11 @@
-#include "colours.hpp"
+#include "../includes/colours.hpp"
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include <climits>
 #include <set>
-#include "bank.hpp"
+#include "../includes/account.hpp"
+#include "../includes/bank.hpp"
 
 void test1()
 {
