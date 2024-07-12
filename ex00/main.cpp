@@ -6,32 +6,27 @@
 #include <set>
 #include "bank.hpp"
 
-void testAddMoneyViaBankOnly()
+void test1()
 {
-    std::cout << CYAN << "Test: Adding money to an account can only be done via the bank...\n" << RESET;
+    std::cout << "test 1 \n";
     Bank bank;
     bank.createAccount(1);
 
-    // Attempt to add money directly (should not be possible in a protected class)
-    // Direct modification is not allowed, so we modify through the bank
+    
     bank.deposit(0, 100);
     if (bank.getValue(0) == 96 && bank.getVault() == 5)
     {
-        std::cout << GREEN << "Test passed!\n" << RESET;
+        std::cout << GREEN << "1 passed!\n" << RESET;
     }
     else
     {
-        std::cout << RED << "Test failed!\n" << RESET;
+        std::cout << RED << "1 failed!\n" << RESET;
     }
 
-    // Attempt to modify account directly (should not be possible)
-    // This test checks the encapsulation indirectly by only allowing bank modification
-    // If encapsulation is broken, manual setting would be possible
 }
 
-void testGiveLoan(void)
+void test2(void)
 {
-    std::cout << CYAN << "Test: Bank can give a loan within its funds...\n" << RESET;
     Bank bank;
     bank.createAccount(1);
     bank.deposit(0, 1000);
@@ -39,16 +34,13 @@ void testGiveLoan(void)
 
     if (bank.getValue(0) == 1001 && bank.getVault() == 0)
     {
-        std::cout << GREEN << "Test passed!\n" << RESET;
+        std::cout << GREEN << "2 passed!\n" << RESET;
     }
     else
     {
-        std::cout << RED << "Test failed!\n" << RESET;
+        std::cout << RED << "2 failed!\n" << RESET;
     
     }
-
-    // Test giving loan exceeding liquidity
-    std::cout << CYAN << "Test: Bank cannot give a loan exceeding its funds...\n" << RESET;
     Bank bank2;
     bank2.createAccount(1);
     bank2.deposit(0, 1000);
@@ -56,17 +48,16 @@ void testGiveLoan(void)
     
     if (bank2.getValue(0) == 1001 && bank2.getVault() == 0)
     {
-        std::cout << RED << "Test failed!\n" << RESET;
+        std::cout << RED << "2.1 failed!\n" << RESET;
     }
     else
     {
-        std::cout << GREEN << "Test passed!\n" << RESET;
+        std::cout << GREEN << "2.1 passed!\n" << RESET;
     }
 }
 
-void testCreateDeleteModifyAccounts()
+void test3()
 {
-    std::cout << CYAN << "Test: Bank can create, delete, and modify accounts...\n" << RESET;
     Bank bank;
     bank.createAccount(1);
     bank.createAccount(1);
@@ -77,69 +68,96 @@ void testCreateDeleteModifyAccounts()
 
     if (initialSize == 2 && newSize == 1)
     {
-        std::cout << GREEN << "Test 1 passed!\n" << RESET;
+        std::cout << GREEN << "3 passed!\n" << RESET;
     }
     else
     {
-        std::cout << RED << "Test 1 failed!\n" << RESET;
+        std::cout << RED << "Test 3 failed!\n" << RESET;
     }
 
-    // Test modifying account
     bank.deposit(1, 100);
     
     if (bank.getValue(1) == 96 && bank.getVault() == 5)
     {
-        std::cout << GREEN << "Test 2 passed!\n" << RESET;
+        std::cout << GREEN << "3.1 passed!\n" << RESET;
     }
     else
     {
-        std::cout << RED << "Test 2 failed! : " << bank.getValue(1) << RESET;
+        std::cout << RED << "3.1 failed! : " << bank.getValue(1) << RESET;
     }
 
     std::cout << "Money in the bank: " << bank.getValue(0) << std::endl; 
 
-    // test add money to not exist account
     bank.deposit(3, 100);
-
-    // change id of account
     bank.createAccount(1);
     std::cout << "Money in the bank: " << bank.getValue(2) << std::endl;
 
     
 }
 
-/* void testAccountModificationProtection()
+/* void test4()
 {
     std::cout << CYAN << "Test: Account attributes are not modifiable from the outside...\n" << RESET;
     Account account(0, 1);
     int originalValue = account.getValue();
-
-    // Attempt to modify account value directly
-    account.addValue(100); // This is the only way to modify it
+    account.addValue(100);
 
     if (account.getValue() == originalValue + 100)
     {
-        std::cout << GREEN << "Test passed!\n" << RESET;
+        std::cout << GREEN << "4 passed!\n" << RESET;
     }
     else
     {
-        std::cout << RED << "Test failed!\n" << RESET;
+        std::cout << RED << "4 failed!\n" << RESET;
     }
 } */
+
+void test5()
+{
+    Bank bank;
+
+    // Test creating 1000 accounts
+    for (int i = 0; i < 1000; ++i)
+    {
+        bank.createAccount(1);
+    }
+    if (bank.getNAccounts() == 1000)
+    {
+        std::cout << GREEN << "Created 1000 accounts.\n" << RESET;
+    }
+    else
+    {
+        std::cout << RED << "Didnt create 1000 accounts.\n" << RESET;
+    }
+
+    try
+    {
+        for (long i = 0; i < static_cast<long>(INT_MAX) + 1; ++i)
+        {
+            bank.createAccount(1);
+        }
+        std::cout << GREEN << "Created more than INT_MAX accounts.\n" << RESET;
+    }
+    catch (const std::exception &e)
+    {
+        std::cout << RED << "failed Exception: " << e.what() << "\n" << RESET;
+    }
+    catch (...)
+    {
+        std::cout << RED << "failed Unknown exception.\n" << RESET;
+    }
+}
+
 
 int main(void)
 {
     std::cout << PURPLE << "Running tests...\n" << RESET;
-
-    // Encapsulation test
-/*     TestEncapsulation tester;
-    tester.testAccount();
-    tester.testBank(); */
     
     //testAccountModificationProtection();
-    testCreateDeleteModifyAccounts();
-    testGiveLoan();
-    testAddMoneyViaBankOnly();
+    test1();
+    test2();
+    test3();
+    //test5();
     
     return (0);
 }
