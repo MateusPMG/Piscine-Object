@@ -9,6 +9,7 @@ class Bank {
 	private:
 		std::vector<Account> accountList;
 		int vault;
+		int nextid;
 	public:
 		Bank();
 		~Bank();
@@ -22,4 +23,5 @@ class Bank {
 		int getValue(int id);
 		int getVault();
 		int getNAccounts();
+		void printAid();
 };

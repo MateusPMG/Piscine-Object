@@ -1,6 +1,6 @@
 #include "../includes/bank.hpp"
 
-Bank::Bank():vault(0){}
+Bank::Bank():vault(0),nextid(0){}
 
 Bank::~Bank(){}
 
@@ -26,11 +26,13 @@ void Bank::createAccount(int value){
 	}
 	if (accountList.size() == 0){
 		accountList.push_back(Account(0, value));
-		std::cout << "Account number 0 was created\n";
+		std::cout << "Account number " << nextid << " was created\n";
+		nextid++;
 	}
 	else{
-		std::cout << "Account number " << accountList.size() << " was created \n";
-		accountList.push_back(Account(accountList.size(), value));
+		std::cout << "Account number " << nextid << " was created \n";
+		accountList.push_back(Account(nextid, value));
+		nextid++;
 	}
 }
 
@@ -88,4 +90,10 @@ int Bank::getVault(){
 
 int Bank::getNAccounts(){
 	return (accountList.size());
+}
+
+void Bank::printAid(){
+	for (std::vector<Account>::iterator it = accountList.begin(); it < accountList.end(); it++){
+		std::cout << "Account id: " << (*it).getID() << std::endl;
+	}
 }

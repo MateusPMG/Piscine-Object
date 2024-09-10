@@ -91,6 +91,9 @@ void test3()
 
     bank.deposit(3, 100);
     bank.createAccount(1);
+	bank.createAccount(1);
+	bank.createAccount(1);
+	bank.printAid();
     std::cout << "Money in the bank: " << bank.getValue(2) << std::endl;
 
     
