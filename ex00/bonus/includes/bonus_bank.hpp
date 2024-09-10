@@ -4,8 +4,8 @@
 
 class Bank{
 	class Account{
-		
+
 	};
 	private:
 		std::vector<Account> accountList;
-}
+};
