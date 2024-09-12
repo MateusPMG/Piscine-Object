@@ -25,13 +25,15 @@ void Bank::createAccount(int value){
 		std::cout << "Accounts cannot be created without an initial deposit value > 0\n";
 	}
 	if (accountList.size() == 0){
-		accountList.push_back(Account(0, value));
+		vault += 0.05 * value;
+		accountList.push_back(Account(0, 0.95 * value));
 		std::cout << "Account number " << nextid << " was created\n";
 		nextid++;
 	}
 	else{
+		vault += 0.05 * value;
 		std::cout << "Account number " << nextid << " was created \n";
-		accountList.push_back(Account(nextid, value));
+		accountList.push_back(Account(nextid, 0.95 * value));
 		nextid++;
 	}
 }

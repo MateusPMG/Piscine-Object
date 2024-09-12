@@ -15,7 +15,7 @@ void test1()
 
     
     bank.deposit(0, 100);
-    if (bank.getValue(0) == 96 && bank.getVault() == 5)
+    if (bank.getValue(0) == 95 && bank.getVault() == 5)
     {
         std::cout << GREEN << "1 passed!\n" << RESET;
     }
@@ -33,7 +33,7 @@ void test2(void)
     bank.deposit(0, 1000);
     bank.loan(0, 50);
 
-    if (bank.getValue(0) == 1001 && bank.getVault() == 0)
+    if (bank.getValue(0) == 1000 && bank.getVault() == 0)
     {
         std::cout << GREEN << "2 passed!\n" << RESET;
     }
@@ -47,7 +47,7 @@ void test2(void)
     bank2.deposit(0, 1000);
     bank2.loan(0, 5000);
     
-    if (bank2.getValue(0) == 1001 && bank2.getVault() == 0)
+    if (bank2.getValue(0) != 950 && bank2.getVault() == 0)
     {
         std::cout << RED << "2.1 failed!\n" << RESET;
     }
@@ -78,7 +78,7 @@ void test3()
 
     bank.deposit(1, 100);
     
-    if (bank.getValue(1) == 96 && bank.getVault() == 5)
+    if (bank.getValue(1) == 95 && bank.getVault() == 5)
     {
         std::cout << GREEN << "3.1 passed!\n" << RESET;
     }

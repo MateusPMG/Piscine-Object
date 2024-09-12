@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include <vector>
+#include <map>
 
 class BonusBank{
 	class BonusAccount{
@@ -9,6 +9,7 @@ class BonusBank{
 			int value;
 			BonusAccount();
 			BonusAccount(int id, int value);
+			friend class BonusBank;
 		public:
 			BonusAccount& operator=(const BonusAccount& copy);
 			BonusAccount(const BonusAccount& copy);
@@ -17,7 +18,7 @@ class BonusBank{
 			const int &getValue() const;
 	};
 	private:
-		std::vector<BonusAccount> accountList;
+		std::map<int, BonusAccount> accountList;
 		int vault;
 		int nextid;
 	public:
